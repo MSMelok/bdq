@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Location Qualifier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="qualifier-app">
+        <header class="app-header">
+            <h1>📍 Location Qualification Tool</h1>
+            <p>Search by store name or paste a full address to qualify a location.</p>
+        </header>
+        
+        <div class="input-group">
+            <input type="text" id="address-input" placeholder="e.g., La Michoacana El Paso TX">
+            <button id="qualify-btn">Qualify</button>
+        </div>
+
+        <div class="settings-panel">
+            <label for="min-pop-density">Min. Pop. Density / sq mi:</label>
+            <input type="number" id="min-pop-density" value="3000">
+        </div>
+
+        <div id="final-status-container" class="hidden">
+            <span id="final-status-icon"></span>
+            <h2 id="final-status-text"></h2>
+        </div>
+
+        <div id="results-container" class="hidden">
+            <h2 id="result-business-name"></h2>
+
+            <div class="result-grid">
+                <div class="result-card" id="step-1-geocode">
+                    <div class="status-icon pending"></div>
+                    <h4>1. Geocoding</h4>
+                    <p id="geocode-result"></p>
+                </div>
+
+                <div class="result-card" id="step-2-population">
+                    <div class="status-icon pending"></div>
+                    <h4>2. Population Density</h4>
+                    <p id="population-result"></p>
+                </div>
+
+                <div class="result-card" id="step-3-btms">
+                    <div class="status-icon pending"></div>
+                    <h4>3. Nearby BTMs (1 mi)</h4>
+                    <p id="btm-result"></p>
+                </div>
+
+                <div class="result-card" id="step-4-biz-type">
+                    <div class="status-icon pending"></div>
+                    <h4>4. Business Type</h4>
+                    <p id="biz-type-result"></p>
+                </div>
+
+                <div class="result-card" id="step-5-hours">
+                    <div class="status-icon pending"></div>
+                    <h4>5. Store Hours</h4>
+                    <p id="hours-result"></p>
+                </div>
+            </div>
+            
+            <div id="extra-info">
+                <h4>Competitor Intel:</h4>
+                <p id="competitor-intel"></p>
+            </div>
+        </div>
+    </main>
+
+    <section class="zip-scout hidden">
+        <h3>🔍 ZIP Code Scout</h3>
+        <p>Find all Tier 1 & 2 stores in a ZIP code with no nearby BD BTMs.</p>
+        <div class="input-group">
+            <input type="text" id="zip-scout-input" placeholder="Enter ZIP code">
+            <button id="zip-scout-btn">Find Leads</button>
+        </div>
+        <div id="zip-scout-results">
+            </div>
+        
+        <div id="export-controls" class="hidden">
+            <button id="export-csv-btn" class="export-btn">Export as CSV</button>
+            <button id="export-json-btn" class="export-btn">Export as JSON</button>
+        </div>
+    </section>
+
+    <footer>
+        <p id="copyright-toggle" title="Click to toggle ZIP Scout">
+            © 2025 Bitcoin Depot. All rights reserved.
+        </p>
+    </footer>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApCw7BD3IhGJYt8zMLzMX9uiY37VppcH0&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src="app.js"></script>
+</body>
+</html>
